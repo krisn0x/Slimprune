@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Slimprune</string>
+    <string name="background">background</string>
+    <string name="editText_setUserId">Current User ID</string>
+    <string name="button_setUserId">Set UID</string>
+    <string name="button_track">Track Event</string>
+    <string name="track_eventName">event name</string>
+    <string name="track_params">{params:JSON}</string>
+    <string name="track_value">value</string>
+    <string name="setUserAttributes_attributeName">attribute name</string>
+    <string name="setUserAttributes_attributeValue">attribute value</string>
+    <string name="button_setUserAttributes">Set User Attribute</string>
+    <string name="state1">SLIM</string>
+    <string name="state2">PRUNE</string>
+    <string name="appName">Slimprune</string>
+</resources>

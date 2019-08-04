@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "293010453962",
+    "firebase_url": "https://slimprune.firebaseio.com",
+    "project_id": "slimprune",
+    "storage_bucket": "slimprune.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:293010453962:android:ecb2eed3ebcb5087",
+        "android_client_info": {
+          "package_name": "com.chris.slimprune"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "293010453962-0gq05lo3687fv9kfr305dbfa9r8nlgi0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPY3cWWzrrgKjky_fS5YXH6wEyxNEMSDc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "293010453962-0gq05lo3687fv9kfr305dbfa9r8nlgi0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
