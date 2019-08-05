@@ -3,6 +3,7 @@ package com.chris.slimprune;
 import com.leanplum.Leanplum;
 import com.leanplum.LeanplumApplication;
 import com.leanplum.Var;
+import com.leanplum.custommessagetemplates.MessageTemplates;
 
 public class ApplicationClass extends LeanplumApplication {
 
@@ -30,6 +31,9 @@ public class ApplicationClass extends LeanplumApplication {
         // Leanplum.trackAllAppScreens();
 
         // This will only run once per session, even if the activity is restarted.
+
+        MessageTemplates.register(getApplicationContext());
+
         Leanplum.start(this);
 
 

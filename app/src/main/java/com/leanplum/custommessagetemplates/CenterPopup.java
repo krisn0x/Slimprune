@@ -32,21 +32,21 @@ import com.leanplum.callbacks.PostponableAction;
 import com.leanplum.callbacks.VariablesChangedCallback;
 
 /**
- * Registers a Leanplum action that displays a custom Impending Doom Reminder dialog.
+ * Registers a Leanplum action that displays a custom center popup dialog.
  *
- * @author Kristiyan Nikolov
+ * @author Andrew First
  */
-public class ImpendingDoomReminder extends BaseMessageDialog {
-    private static final String NAME = "Impending Doom Reminder";
+public class CenterPopup extends BaseMessageDialog {
+    private static final String NAME = "Center Popup";
 
-    public ImpendingDoomReminder(Activity activity, ImpendingDoomReminderOptions options) {
+    public CenterPopup(Activity activity, com.leanplum.custommessagetemplates.CenterPopupOptions options) {
         super(activity, false, options, null, null);
         this.options = options;
     }
 
     public static void register(Context currentContext) {
         Leanplum.defineAction(NAME, Leanplum.ACTION_KIND_MESSAGE | Leanplum.ACTION_KIND_ACTION,
-                ImpendingDoomReminderOptions.toArgs(currentContext), new ActionCallback() {
+                com.leanplum.custommessagetemplates.CenterPopupOptions.toArgs(currentContext), new ActionCallback() {
                     @Override
                     public boolean onResponse(final ActionContext context) {
                         Leanplum.addOnceVariablesChangedAndNoDownloadsPendingHandler(
@@ -60,8 +60,8 @@ public class ImpendingDoomReminder extends BaseMessageDialog {
                                                 if (activity == null) {
                                                     return;
                                                 }
-                                                ImpendingDoomReminder popup = new ImpendingDoomReminder(activity,
-                                                        new ImpendingDoomReminderOptions(context));
+                                                CenterPopup popup = new CenterPopup(activity,
+                                                        new CenterPopupOptions(context));
                                                 if (!activity.isFinishing()) {
                                                     popup.show();
                                                 }

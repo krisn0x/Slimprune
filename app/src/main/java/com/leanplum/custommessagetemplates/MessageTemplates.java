@@ -19,7 +19,7 @@
  * under the License.
  */
 
-package com.leanplum.messagetemplates;
+package com.leanplum.custommessagetemplates;
 
 import android.content.Context;
 
@@ -40,7 +40,6 @@ public class MessageTemplates {
     static final String CANCEL_TEXT = "Cancel text";
     static final String DISMISS_TEXT = "Dismiss text";
     static final String MAYBE_TEXT = "Maybe text";
-    static final String DOOM_TEXT= "Doom text";
     static final String ACCEPT_ACTION = "Accept action";
     static final String CANCEL_ACTION = "Cancel action";
     static final String DISMISS_ACTION = "Dismiss action";
@@ -85,7 +84,8 @@ public class MessageTemplates {
     static final String OK_TEXT = "OK";
     static final String YES_TEXT = "Yes";
     static final String NO_TEXT = "No";
-    static final String DOOM_TEXT = "ɯǝɹɯoǝɥsıʞɥɔıs";
+    static final String DOOM_TEXT_INVERTED = "ɯǝɹɯoǝɥsıʞɥɔıs";
+    static final String DOOM_TEXT = "sichkisheomrem";
     static final String MAYBE_TEXT= "Maybe";
     static final int CENTER_POPUP_WIDTH = 300;
     static final int CENTER_POPUP_HEIGHT = 250;

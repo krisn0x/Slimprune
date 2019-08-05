@@ -2,6 +2,7 @@ package com.chris.slimprune;
 
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.graphics.drawable.AnimatedVectorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -16,8 +17,6 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat;
 
@@ -28,10 +27,8 @@ import com.leanplum.Var;
 import com.leanplum.callbacks.StartCallback;
 import com.leanplum.callbacks.VariableCallback;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 import static com.chris.slimprune.ApplicationClass.bgColor;
 import static com.chris.slimprune.ApplicationClass.drawableColor;
@@ -70,7 +67,11 @@ public class MainActivity extends AppCompatActivity {
         setUserAttributeValueEditText = findViewById(R.id.main_attributeValue_editText);
         setUserAttributeButton = findViewById(R.id.main_attribute_button);
         stateSwitch = findViewById(R.id.main_state_switch);
+        state1TextView = findViewById(R.id.main_state1_textView);
+        state2TextView = findViewById(R.id.main_state2_textView);
 
+
+        Leanplum.advanceTo("SLIM");
 
         /** SET BACKGROUND COLOR FROM LEANPLUM VARIABLE */
         if (bgColor.value() != null && drawableColor.value() != null) {
@@ -194,6 +195,32 @@ public class MainActivity extends AppCompatActivity {
                 setUserAttributeNameEditText.setText("");
                 setUserAttributeValueEditText.setText("");
                 return true;
+            }
+        });
+
+        stateSwitch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (stateSwitch.isChecked()) {
+                    state1TextView.setTypeface(null, Typeface.NORMAL);
+                    state2TextView.setTypeface(null, Typeface.BOLD);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        state1TextView.setTextColor(getColor(R.color.colorTextHint));
+                        state2TextView.setTextColor(getColor(R.color.colorText));
+                    }
+                    Leanplum.advanceTo("PRUNE");
+                    Toast.makeText(MainActivity.this, "Entered state PRUNE", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    state1TextView.setTypeface(null, Typeface.BOLD);
+                    state2TextView.setTypeface(null, Typeface.NORMAL);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        state1TextView.setTextColor(getColor(R.color.colorText));
+                        state2TextView.setTextColor(getColor(R.color.colorTextHint));
+                    }
+                    Leanplum.advanceTo("SLIM");
+                    Toast.makeText(MainActivity.this, "Entered state SLIM", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

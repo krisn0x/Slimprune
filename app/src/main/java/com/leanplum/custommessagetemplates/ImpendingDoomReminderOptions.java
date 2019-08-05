@@ -19,26 +19,25 @@
  * under the License.
  */
 
-package com.leanplum.messagetemplates;
+package com.leanplum.custommessagetemplates;
 
 import android.content.Context;
 
 import com.leanplum.ActionArgs;
 import com.leanplum.ActionContext;
-import com.leanplum.messagetemplates.MessageTemplates.Args;
+import com.leanplum.custommessagetemplates.MessageTemplates.Args;
 
 /**
- * Options used by {@link CenterPopup}.
+ * Options used by {@link ImpendingDoomReminder}.
  *
- * @author Martin Yanakiev
+ * @author Kristiyan Nikolov
  */
-public class ImpendingDoomReminderOptions extends BaseMessageOptions {
+public class ImpendingDoomReminderOptions extends CenterPopupOptions {
     private int width;
     private int height;
 
     public ImpendingDoomReminderOptions(ActionContext context) {
         super(context);
-        super.setAcceptButtonText(context.stringNamed(Args.DOOM_TEXT));
         setWidth(context.numberNamed(Args.LAYOUT_WIDTH).intValue());
         setHeight(context.numberNamed(Args.LAYOUT_HEIGHT).intValue());
     }
@@ -62,6 +61,8 @@ public class ImpendingDoomReminderOptions extends BaseMessageOptions {
     public static ActionArgs toArgs(Context currentContext) {
         return BaseMessageOptions.toArgs(currentContext)
                 .with(Args.LAYOUT_WIDTH, MessageTemplates.Values.CENTER_POPUP_WIDTH)
-                .with(Args.LAYOUT_HEIGHT, MessageTemplates.Values.CENTER_POPUP_HEIGHT);
+                .with(Args.LAYOUT_HEIGHT, MessageTemplates.Values.CENTER_POPUP_HEIGHT)
+                .with(Args.MESSAGE_TEXT, MessageTemplates.Values.DOOM_TEXT)
+                .with(Args.ACCEPT_BUTTON_TEXT, MessageTemplates.Values.DOOM_TEXT_INVERTED);
     }
 }
