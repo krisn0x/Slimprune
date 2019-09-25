@@ -10,8 +10,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -32,6 +37,7 @@ import java.util.Map;
 
 import static com.chris.slimprune.ApplicationClass.bgColor;
 import static com.chris.slimprune.ApplicationClass.drawableColor;
+//import static com.chris.slimprune.ApplicationClass.testVar;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,13 +54,18 @@ public class MainActivity extends AppCompatActivity {
     private Switch stateSwitch;
     private TextView state1TextView;
     private TextView state2TextView;
+    private ImageButton forceContentUpdateButton;
+    private Button webViewButton;
+    private WebView webView;
 
+    private RotateAnimation rotate = new RotateAnimation(0, 360,
+            Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
+            0.5f);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         bg = findViewById(R.id.main_imageView);
         setUserIdEditText = findViewById(R.id.main_setUserId_editText);
@@ -69,31 +80,47 @@ public class MainActivity extends AppCompatActivity {
         stateSwitch = findViewById(R.id.main_state_switch);
         state1TextView = findViewById(R.id.main_state1_textView);
         state2TextView = findViewById(R.id.main_state2_textView);
-
+        forceContentUpdateButton = findViewById(R.id.main_update_imageButton);
+        webViewButton = findViewById(R.id.main_webview_button);
+        webView = findViewById(R.id.main_webView);
 
         Leanplum.advanceTo("SLIM");
 
-        /** SET BACKGROUND COLOR FROM LEANPLUM VARIABLE */
-        if (bgColor.value() != null && drawableColor.value() != null) {
-            bg.setBackgroundColor(Color.parseColor(bgColor.value()));
-            bg.setColorFilter(Color.parseColor(drawableColor.value()), PorterDuff.Mode.MULTIPLY);
-        }
+
+        webView.setWebViewClient(new WebViewClient());
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setDomStorageEnabled(true);
+        webView.setOverScrollMode(WebView.OVER_SCROLL_NEVER);
+//        webView.loadData(html, "text/html", "UTF-8");
+
+
+        /** SET BACKGROUND COLOR FROM LEANPLUM VARIABLE THROUGH CALLBACKS */
         bgColor.addValueChangedHandler(new VariableCallback<String>() {
             @Override
             public void handle(Var<String> var) {
-
-                if (bgColor.value() != null && drawableColor.value() != null) {
+                if (!bgColor.value().isEmpty())
                     bg.setBackgroundColor(Color.parseColor(bgColor.value()));
-                    bg.setColorFilter(Color.parseColor(drawableColor.value()), PorterDuff.Mode.MULTIPLY);
-                }
+                else bg.setBackgroundColor(0);
             }
         });
+
+        drawableColor.addValueChangedHandler(new VariableCallback<String>() {
+            @Override
+            public void handle(Var<String> var) {
+                if (!drawableColor.value().isEmpty())
+                    bg.setColorFilter(Color.parseColor(drawableColor.value()), PorterDuff.Mode.MULTIPLY);
+                else bg.clearColorFilter();
+            }
+        });
+
 
         /** SET CURRENT USER ID IN HINT */
         Leanplum.addStartResponseHandler(new StartCallback() {
             @Override
             public void onResponse(boolean success) {
                 setUserIdEditText.setHint(Leanplum.getUserId());
+                Log.d("USER ID", Leanplum.getUserId());
+                Log.d("DEVICE ID", Leanplum.getDeviceId());
             }
         });
 
@@ -109,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
                     setUserIdEditText.setText("");
                     setUserIdEditText.setHint(newUserId);
                     setUserIdEditText.clearFocus();
-                    Log.d("New User ID: ", newUserId);
+                    Log.d("New User ID: ", Leanplum.getUserId());
                 }
             }
         });
@@ -118,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String eventName = null;
-                Double eventValue = null;
+                Double eventValue = 0d;
                 Map<String, Object> eventParams;
 
                 try {
@@ -210,6 +237,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     Leanplum.advanceTo("PRUNE");
                     Toast.makeText(MainActivity.this, "Entered state PRUNE", Toast.LENGTH_SHORT).show();
+//                    Log.d("VARIABLE",testVar.value());
 
                 } else {
                     state1TextView.setTypeface(null, Typeface.BOLD);
@@ -221,6 +249,23 @@ public class MainActivity extends AppCompatActivity {
                     Leanplum.advanceTo("SLIM");
                     Toast.makeText(MainActivity.this, "Entered state SLIM", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        forceContentUpdateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Leanplum.forceContentUpdate();
+                rotate.setDuration(1000);
+                forceContentUpdateButton.startAnimation(rotate);
+                Toast.makeText(MainActivity.this, "Forced content update", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        webViewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    webView.setVisibility(View.VISIBLE);
             }
         });
     }

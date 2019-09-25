@@ -60,15 +60,14 @@
                 android:textColorHint="@color/colorTextHint"
                 android:textSize="20sp" />
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="29dp" />
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:weightSum="3">
+                android:weightSum="3"
+                android:layout_marginTop="30dp">
 
                 <EditText
                     android:id="@+id/main_trackEventName_editText"
@@ -125,43 +124,48 @@
                 android:textColorHint="@color/colorTextHint"
                 android:textSize="20sp" />
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="30dp" />
 
-            <EditText
-                android:id="@+id/main_attributeName_editText"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:hint="@string/setUserAttributes_attributeName"
-                android:inputType="textPersonName"
-                android:shadowColor="@color/colorShadow"
-                android:shadowDx="4"
-                android:shadowDy="4"
-                android:shadowRadius="6"
-                android:textAlignment="center"
-                android:textColor="@color/colorText"
-                android:textColorHint="@color/colorTextHint"
-                android:textSize="20sp" />
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="30dp">
 
-            <EditText
-                android:id="@+id/main_attributeValue_editText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:fontFamily="sans-serif-condensed-medium"
-                android:hint="@string/setUserAttributes_attributeValue"
-                android:inputType="textPersonName"
-                android:shadowColor="@color/colorShadow"
-                android:shadowDx="4"
-                android:shadowDy="4"
-                android:shadowRadius="6"
-                android:textAlignment="center"
-                android:textColor="@color/colorText"
-                android:textColorHint="@color/colorTextHint"
-                android:textSize="20sp" />
+                <EditText
+                    android:id="@+id/main_attributeName_editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:hint="@string/setUserAttributes_attributeName"
+                    android:inputType="textPersonName"
+                    android:shadowColor="@color/colorShadow"
+                    android:shadowDx="4"
+                    android:shadowDy="4"
+                    android:shadowRadius="6"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorText"
+                    android:textColorHint="@color/colorTextHint"
+                    android:textSize="20sp" />
+
+                <EditText
+                    android:id="@+id/main_attributeValue_editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:fontFamily="sans-serif-condensed-medium"
+                    android:hint="@string/setUserAttributes_attributeValue"
+                    android:inputType="textPersonName"
+                    android:shadowColor="@color/colorShadow"
+                    android:shadowDx="4"
+                    android:shadowDy="4"
+                    android:shadowRadius="6"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorText"
+                    android:textColorHint="@color/colorTextHint"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
@@ -185,17 +189,12 @@
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="29dp" />
-
             <Button
                 android:id="@+id/main_track_button"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="match_parent"
                 android:layout_height="96dp"
                 android:fontFamily="sans-serif-condensed-medium"
-                android:onClick="trackEvent"
                 android:shadowColor="@color/colorShadow"
                 android:shadowDx="4"
                 android:shadowDy="4"
@@ -204,11 +203,9 @@
                 android:textAlignment="gravity"
                 android:textColor="@color/colorText"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginTop="30dp"/>
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="30dp" />
 
             <Button
                 android:id="@+id/main_attribute_button"
@@ -224,7 +221,8 @@
                 android:textAlignment="gravity"
                 android:textColor="@color/colorText"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_marginTop="30dp"/>
 
         </LinearLayout>
 
@@ -310,6 +308,43 @@
         app:layout_constraintBottom_toBottomOf="@+id/main_state_switch"
         app:layout_constraintStart_toEndOf="@+id/main_state_switch"
         app:layout_constraintTop_toTopOf="@+id/main_state_switch" />
+
+    <ImageButton
+        android:id="@+id/main_update_imageButton"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="32dp"
+        android:background="@android:drawable/ic_popup_sync"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_state_switch" />
+
+    <Button
+        android:id="@+id/main_webview_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Open WebView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_update_imageButton"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:fontFamily="sans-serif-condensed-medium"
+        android:shadowColor="@color/colorShadow"
+        android:shadowDx="4"
+        android:shadowDy="4"
+        android:shadowRadius="6"
+        android:textColor="@color/colorText"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+    <WebView
+        android:id="@+id/main_webView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
